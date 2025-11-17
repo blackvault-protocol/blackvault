@@ -1,0 +1,12 @@
+[package]
+name = "lockbox_v1"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+ff = "^0.13"
+group = "^0.13"
+halo2_gadgets = "^0.3"
+halo2_proofs = "^0.3"
+rand = { version = "0.8", features = ["getrandom"] }
+rand_core = "0.9.3"
