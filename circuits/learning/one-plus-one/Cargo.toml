@@ -1,0 +1,10 @@
+[package]
+name = "one-plus-one"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+ff = "^0.13"
+halo2_gadgets = "^0.3"
+halo2_proofs = "^0.3"
+rand_core = "^0.6"
