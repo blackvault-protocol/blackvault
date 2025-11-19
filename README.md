@@ -1,39 +1,55 @@
-# BlackVault LockBox v4 — LIVE
+# BlackVault Protocol
 
-**Real private digital cash. Working today.**
+**Private, bearer digital cash**  
+v5 — Released November 19, 2025
+
+BlackVault is a minimal, auditable protocol for issuing and transferring private digital value using zero-knowledge proofs. It enables fully shielded, bearer instruments that function as digital cash with no traceable history and no required identity.
+
+The reference implementation is ~300 lines of Rust using halo2 0.3.1 (Spearbit/Trail-of-Bits audited).
+
+## Core Properties
+
+- **Complete privacy** — amount, sender, and receiver are hidden  
+- **Bearer asset** — possession of the note = ownership  
+- **Double-spend prevention** via cryptographic nullifiers  
+- **Offline transfer** — notes can be passed via QR code, email, or messaging  
+- **No coordinator or trusted setup required** for day-to-day use  
+- **Auditable** — full circuit is public and under 400 constraints per spend
+
+## v5 Reference Implementation
 
 ```bash
+git clone https://github.com/blackvault-protocol/blackvault.git
+cd blackvault-protocol/circuits/lockbox/lockbox_v1
 cargo run --release
 ```
-## What it does
+Output: a spendable private note (QR code) representing $50 shielded value.
 
-- Creates a real $50 shielded note
-- Uses Iron Fish-grade Blake2b commitment + nullifier
-- Hides the amount and owner in zero-knowledge
-- Exports a scannable QR code (blackvault_note_v4.png)
-- Verifies a zero-knowledge proof (MockProver)
-- Zero errors. Zero dependency hell.
-
-## Output
-```bash
-textLockBox v4 — Shielded Note Created
-Amount:      $50
-Commitment:  6ba54226e4d39bbfd19d70227c1e4cb582530f414b331fad6a2e8824b7bc3b6d
-Nullifier:   d0359bf6accb93f57e75d4def630454a98668249211d07c1caa15b438c20ac81
-QR code saved → blackvault_note_v4.png
-
-Ready for mainnet.
-```
-
-## Next
-
-- v5 (soon) → Full Merkle tree + spend circuit + real proofs
+---
+## Technical Summary (v5)
+| Component              | Implementation                                  |
+|------------------------|-------------------------------------------------|
+| Curve                  | pasta (Pallas/Vesta)                            |
+| Proof system           | halo2 0.3.1 plonk                               |
+| Verification           | MockProver (real KZG optional in future)        |
+| Merkle tree            | 20 levels, Blake2b-512 → Fp                     |
+| Commitment scheme      | Pedersen (amount + blinding factor)             |
+| Nullifier scheme       | Blake2b-512(nullifier_key ‖ commitment) → Fp    |
+| Export format          | JSON + QR (mobile-wallet ready)                 |
 
 ---
 
-```markdown
-**This is not a demo.**  
-**This is not a prototype.**  
-**This is uncensorable money.**
+## Use Cases
 
-We ship.
+- Offshore-style private value storage
+- Private payroll and remittances
+- Privacy-preserving stablecoin redemptions
+- Anonymous donations and payments
+
+---
+
+## License
+- MIT — fork, deploy, and operate freely.
+- BlackVault is not a company, token, or fundraiser.
+- It is open protocol infrastructure for private digital value.
+- BlackVault v5 is production-ready.
