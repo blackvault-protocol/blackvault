@@ -53,3 +53,7 @@ Output: a spendable private note (QR code) representing $50 shielded value.
 - BlackVault is not a company, token, or fundraiser.
 - It is open protocol infrastructure for private digital value.
 - BlackVault v5 is production-ready.
+
+---
+
+See [BLACKPAPER.md](BLACKPAPER.md)
