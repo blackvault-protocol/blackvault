@@ -1,59 +1,83 @@
 # BlackVault Protocol
 
-**Private, bearer digital cash**  
-v5 — Released November 19, 2025
+**Private, bearer, offline digital cash**  
+Production Release: v5  
+**See the full BLACKPAPER** → [BLACKPAPER.md](BLACKPAPER.md)
 
-BlackVault is a minimal, auditable protocol for issuing and transferring private digital value using zero-knowledge proofs. It enables fully shielded, bearer instruments that function as digital cash with no traceable history and no required identity.
+BlackVault is a minimal, auditable protocol for issuing and transferring private digital value using zero knowledge proofs. It produces fully shielded, bearer instruments that behave like digital cash: no traceable history, no identity required, and no coordinator.
 
-The reference implementation is ~300 lines of Rust using halo2 0.3.1 (Spearbit/Trail-of-Bits audited).
+The v5 reference implementation is roughly 300 lines of Rust using halo2 0.3.1 (audited by Spearbit and Trail-of-Bits). The entire circuit is public, under 400 constraints, and can be reviewed in an afternoon.
+
+---
 
 ## Core Properties
 
-- **Complete privacy** — amount, sender, and receiver are hidden  
-- **Bearer asset** — possession of the note = ownership  
-- **Double-spend prevention** via cryptographic nullifiers  
-- **Offline transfer** — notes can be passed via QR code, email, or messaging  
-- **No coordinator or trusted setup required** for day-to-day use  
-- **Auditable** — full circuit is public and under 400 constraints per spend
+- **Complete privacy**: amount, sender, and receiver are shielded  
+- **Bearer asset**: holding the note is ownership  
+- **Double spend prevention** via field level nullifiers  
+- **Offline transfer**: works through QR code, email, messaging, or USB  
+- **No coordinator or trusted setup** for day to day use  
+- **Fully auditable**: minimal, readable, and adversarial friendly
 
-## v5 Reference Implementation
+---
+
+## Quick Start (v5)
 
 ```bash
 git clone https://github.com/blackvault-protocol/blackvault.git
 cd blackvault-protocol/circuits/lockbox/lockbox_v1
 cargo run --release
 ```
-Output: a spendable private note (QR code) representing $50 shielded value.
+
+Output: a spendable private note (QR code) representing 50 units of shielded value.
 
 ---
-## Technical Summary (v5)
+
+## Technical Summary
+
 | Component              | Implementation                                  |
 |------------------------|-------------------------------------------------|
-| Curve                  | pasta (Pallas/Vesta)                            |
+| Curve                  | pasta (Pallas / Vesta)                          |
 | Proof system           | halo2 0.3.1 plonk                               |
-| Verification           | MockProver (real KZG optional in future)        |
-| Merkle tree            | 20 levels, Blake2b-512 → Fp                     |
-| Commitment scheme      | Pedersen (amount + blinding factor)             |
-| Nullifier scheme       | Blake2b-512(nullifier_key ‖ commitment) → Fp    |
-| Export format          | JSON + QR (mobile-wallet ready)                 |
+| Verification           | MockProver (real KZG optional)                  |
+| Merkle tree            | 20 levels, Blake2b 512 to field                 |
+| Commitment scheme      | Pedersen (amount + blinding factor)            |
+| Nullifier scheme       | Blake2b 512 of secret key and commitment → Fp   |
+| Output format          | JSON + QR (mobile wallet ready)                 |
 
 ---
 
 ## Use Cases
 
-- Offshore-style private value storage
-- Private payroll and remittances
-- Privacy-preserving stablecoin redemptions
-- Anonymous donations and payments
+- Offshore style private value storage  
+- Private payroll and remittances  
+- Privacy preserving stablecoin redemptions  
+- Anonymous donations and payments  
+- Censorship resistant financial mobility  
+
+---
+
+## Contributing
+
+BlackVault v5 is production ready but intentionally minimal.  
+Contributions are welcome in:
+
+- Mobile wallet (QR ingest, offline display)  
+- KZG verification for v6  
+- Note splitting and joining  
+- On chain redemption contracts  
+- Documentation and audits  
+
+To contribute, see **[CONTRIBUTING.md](CONTRIBUTING.md)**
 
 ---
 
 ## License
-- MIT — fork, deploy, and operate freely.
-- BlackVault is not a company, token, or fundraiser.
-- It is open protocol infrastructure for private digital value.
-- BlackVault v5 is production-ready.
 
----
+MIT License.  
+BlackVault is not a company, not a token, and not a fundraiser.  
+It is open protocol infrastructure for private digital value.
 
-See [BLACKPAPER.md](BLACKPAPER.md)
+For full context and philosophy, read the BLACKPAPER:  
+**[BLACKPAPER.md](BLACKPAPER.md)**
+
