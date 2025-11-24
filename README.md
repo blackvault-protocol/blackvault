@@ -2,13 +2,13 @@
 
 **Private, bearer, offline digital cash**  
 Production Release: v5  
-
+**See the full BLACKPAPER** → [BLACKPAPER.md](BLACKPAPER.md)
 ## Mint a private note right now
 ```bash
 cd circuits/blackvault-mint && cargo run --release -- --amount 133700
 ```
 → Generates a scannable $1,337.00 shielded note
-**See the full BLACKPAPER** → [BLACKPAPER.md](BLACKPAPER.md)
+
 
 BlackVault is a minimal, auditable protocol for issuing and transferring private digital value using zero knowledge proofs. It produces fully shielded, bearer instruments that behave like digital cash: no traceable history, no identity required, and no coordinator.
 
